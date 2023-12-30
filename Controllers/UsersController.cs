@@ -42,12 +42,14 @@ namespace WebStoreApi.Controllers
         [HttpGet("{name}")]
         public IActionResult GetUser(string name)
         {
-            if (name == null)
+            var user = listUsers.FirstOrDefault(u => u.FirstName.Contains(name) || u.LastName.Contains(name));
+
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(name);
+            return Ok(user);
         }
 
         [HttpPost]
