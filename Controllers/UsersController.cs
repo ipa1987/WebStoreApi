@@ -29,7 +29,7 @@ namespace WebStoreApi.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetUser(int id)
         {
             if (id >= 0 && id < listUsers.Count)
@@ -37,6 +37,17 @@ namespace WebStoreApi.Controllers
                 return Ok(listUsers[id]);
             }
             return NotFound();
+        }
+
+        [HttpGet("{name}")]
+        public IActionResult GetUser(string name)
+        {
+            if (name == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(name);
         }
 
         [HttpPost]
